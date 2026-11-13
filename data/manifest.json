@@ -1,0 +1,199 @@
+{
+  "description": "Sequential normalized text units of at least 1500 characters, not physical PDF pages.",
+  "source_version": "Python 3.12 tutorial, live HTML snapshot",
+  "copyright": "Copyright © 2001-2023 Python Software Foundation; All Rights Reserved",
+  "license_url": "https://docs.python.org/3.12/license.html",
+  "unit_count": 59,
+  "sources": [
+    {
+      "source_id": "introduction",
+      "title": "3-informal-introduction",
+      "source_path_or_url": "https://docs.python.org/3.12/tutorial/introduction.html",
+      "license_or_permission": "Python Software Foundation License Version 2",
+      "accessed_at": "2026-11-13T02:54:10.081142+00:00",
+      "sha256_html": "44f030b58bc1c0521c688457450a3f8ca14b20848e4221827fd205fb680eb5db",
+      "page_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "characters_per_page": [
+        2240,
+        2288,
+        2141,
+        2138,
+        2220,
+        2129,
+        3792
+      ]
+    },
+    {
+      "source_id": "controlflow",
+      "title": "4-control-flow",
+      "source_path_or_url": "https://docs.python.org/3.12/tutorial/controlflow.html",
+      "license_or_permission": "Python Software Foundation License Version 2",
+      "accessed_at": "2026-11-13T02:54:10.081142+00:00",
+      "sha256_html": "71794fe4d941f7dd1ba7b1b125d5bc371cf77b06f250bbf07673f89f6a6d0a31",
+      "page_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16
+      ],
+      "characters_per_page": [
+        2183,
+        2193,
+        2269,
+        2328,
+        2149,
+        2204,
+        2162,
+        2247,
+        2447,
+        2168,
+        2169,
+        2170,
+        2348,
+        2352,
+        2129,
+        2090
+      ]
+    },
+    {
+      "source_id": "datastructures",
+      "title": "5-data-structures",
+      "source_path_or_url": "https://docs.python.org/3.12/tutorial/datastructures.html",
+      "license_or_permission": "Python Software Foundation License Version 2",
+      "accessed_at": "2026-11-13T02:54:10.081142+00:00",
+      "sha256_html": "3f75467774125149c1d97995193f18332043f666c711dd33b81a4fcb719a3920",
+      "page_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "characters_per_page": [
+        2362,
+        2333,
+        2463,
+        2203,
+        2311,
+        2742,
+        2249,
+        2110,
+        3314
+      ]
+    },
+    {
+      "source_id": "modules",
+      "title": "6-modules",
+      "source_path_or_url": "https://docs.python.org/3.12/tutorial/modules.html",
+      "license_or_permission": "Python Software Foundation License Version 2",
+      "accessed_at": "2026-11-13T02:54:10.081142+00:00",
+      "sha256_html": "07b54eaa726c8495636b0094412545a05d4d3163290496c2bd3dcd7888ac5691",
+      "page_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "characters_per_page": [
+        2112,
+        2171,
+        2126,
+        2511,
+        3380,
+        2415,
+        2170,
+        2471,
+        2113,
+        1546
+      ]
+    },
+    {
+      "source_id": "inputoutput",
+      "title": "7-input-and-output",
+      "source_path_or_url": "https://docs.python.org/3.12/tutorial/inputoutput.html",
+      "license_or_permission": "Python Software Foundation License Version 2",
+      "accessed_at": "2026-11-13T02:54:10.081142+00:00",
+      "sha256_html": "bd064c24cd5fdc74cc50b0d96cf4ff0bc713ac99b4e4d6a4c0cee3d7b24f92b3",
+      "page_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "characters_per_page": [
+        2262,
+        2287,
+        2206,
+        2387,
+        2509,
+        2242,
+        2253,
+        2514
+      ]
+    },
+    {
+      "source_id": "errors",
+      "title": "8-errors-and-exceptions",
+      "source_path_or_url": "https://docs.python.org/3.12/tutorial/errors.html",
+      "license_or_permission": "Python Software Foundation License Version 2",
+      "accessed_at": "2026-11-13T02:54:10.081142+00:00",
+      "sha256_html": "f9a32af10feb2cc14ee68b193c7cecdbbf8e67a5d7267e97f7b8a857c44c4101",
+      "page_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "characters_per_page": [
+        2248,
+        2108,
+        2117,
+        2294,
+        2156,
+        2192,
+        2161,
+        2255,
+        2556
+      ]
+    }
+  ]
+}

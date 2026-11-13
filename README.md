@@ -1,5 +1,7 @@
 # Day 06 · Data Ingestion Engineering
 
+> **Bài làm của Nguyễn Văn Đăng (2A202603371, L3A).** Xem [hướng dẫn chạy và cấu trúc kết quả](SOLUTION.md), [báo cáo cá nhân](report/individual/2A202603371_NguyenVanDang.md), [corpus](data/manifest.json) và [benchmark](benchmark/questions.json). Phần dưới là đề bài gốc.
+
 **Lab cá nhân** · **4 giờ** · **Dữ liệu tự chọn**
 
 Biến tài liệu thành kho tri thức có thể truy xuất cho AI agent, rồi đo xem cách chuẩn bị dữ liệu nào hiệu quả nhất.
@@ -10,7 +12,7 @@ Biến tài liệu thành kho tri thức có thể truy xuất cho AI agent, r�
 
 ## Bắt đầu nhanh
 
-Dùng [starter PostgreSQL + pgvector](starter/README.md) để dựng database và hoàn thiện các hàm TODO, hoặc tự chọn vector store tương đương. Starter chỉ là khung: **bạn tự hiện thực pipeline và benchmark**.
+Dùng [starter PostgreSQL + pgvector](starter/README.md) để dựng database và chạy bài làm đã hoàn thiện. Hướng dẫn tái lập và kết quả nằm trong [SOLUTION.md](SOLUTION.md).
 
 ## 1. Xây pipeline
 
@@ -44,4 +46,4 @@ Dùng cùng dữ liệu, model và câu hỏi cho cả ba cấu hình. Tách **1
 | Quy tắc sử dụng dữ liệu, AI và API | [RULES.md](RULES.md) |
 | Cách nộp bài | [SUBMISSION.md](SUBMISSION.md) |
 
-[data/format-example.json](data/format-example.json) chỉ minh họa định dạng, không phải corpus đủ điều kiện. Phần xử lý và benchmark do bạn tự hiện thực; không bắt buộc xây chatbot.
+[data/format-example.json](data/format-example.json) chỉ minh họa định dạng; corpus và benchmark của bài làm nằm trong `data/corpus.jsonl` và `benchmark/questions.json`. Không bắt buộc xây chatbot.

@@ -1,4 +1,4 @@
 strategy,chunking,chunk_size,overlap,metadata,filter,vectorizer,hypothesis,dev_hit1,dev_hit3,test_hit1,test_hit3,notes
-A,,,,,,,,,,,,
-B,,,,,,,,,,,,
-C,,,,,,,,,,,,
+A,fixed,600,60,document_id/source/page/chapter,none,all-MiniLM-L6-v2,"Baseline fixed windows",2/18,3/18,0/6,0/6,"288 chunks; exact cosine"
+B,paragraph,650,0,document_id/source/page/chapter,none,all-MiniLM-L6-v2,"Better context at paragraph boundaries",3/18,5/18,0/6,0/6,"274 chunks; exact cosine"
+C,paragraph,650,0,document_id/source/page/chapter,chapter when specified,all-MiniLM-L6-v2,"Chapter filter narrows relevant scope",4/18,6/18,0/6,1/6,"274 chunks; same vectors as B"

@@ -1,4 +1,7 @@
-# Core setup and PDF parsing. Choose and install an embedding SDK separately.
+# Reproducible local embedding and HTML corpus snapshot.
 psycopg[binary]==3.3.8
 pypdf>=5,<7
 python-dotenv>=1,<2
+sentence-transformers>=6,<7
+beautifulsoup4>=4,<5
+requests>=2,<3

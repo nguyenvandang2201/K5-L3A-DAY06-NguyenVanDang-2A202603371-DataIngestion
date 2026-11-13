@@ -1,0 +1,91 @@
+{
+  "run_at_utc": "2026-11-13T03:02:54.698480+00:00",
+  "model": "sentence-transformers/all-MiniLM-L6-v2",
+  "dimensions": 384,
+  "store": "PostgreSQL 16 + pgvector 0.8.7, exact cosine search",
+  "configurations": {
+    "A": {
+      "method": "fixed",
+      "size": 600,
+      "overlap": 60,
+      "filter": false
+    },
+    "B": {
+      "method": "paragraph",
+      "max_size": 650,
+      "filter": false
+    },
+    "C": {
+      "method": "paragraph",
+      "max_size": 650,
+      "filter": true
+    }
+  },
+  "resources": {
+    "A": {
+      "chunk_count": 288,
+      "min_chars": 1,
+      "median_chars": 600.0,
+      "max_chars": 600,
+      "total_chars": 149571,
+      "ingest_seconds": 5.373,
+      "api_cost_usd": 0
+    },
+    "B": {
+      "chunk_count": 274,
+      "min_chars": 33,
+      "median_chars": 527.0,
+      "max_chars": 649,
+      "total_chars": 135991,
+      "ingest_seconds": 4.807,
+      "api_cost_usd": 0
+    },
+    "C": {
+      "chunk_count": 274,
+      "min_chars": 33,
+      "median_chars": 527.0,
+      "max_chars": 649,
+      "total_chars": 135991,
+      "ingest_seconds": 0.128,
+      "api_cost_usd": 0
+    }
+  },
+  "retrieval": {
+    "A": {
+      "dev": {
+        "n": 18,
+        "hit1": 2,
+        "hit3": 3
+      },
+      "test": {
+        "n": 6,
+        "hit1": 0,
+        "hit3": 0
+      }
+    },
+    "B": {
+      "dev": {
+        "n": 18,
+        "hit1": 3,
+        "hit3": 5
+      },
+      "test": {
+        "n": 6,
+        "hit1": 0,
+        "hit3": 0
+      }
+    },
+    "C": {
+      "dev": {
+        "n": 18,
+        "hit1": 4,
+        "hit3": 6
+      },
+      "test": {
+        "n": 6,
+        "hit1": 0,
+        "hit3": 1
+      }
+    }
+  }
+}

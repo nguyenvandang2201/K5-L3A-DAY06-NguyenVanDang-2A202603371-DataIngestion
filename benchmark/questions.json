@@ -1,0 +1,278 @@
+[
+  {
+    "id": "q01",
+    "split": "dev",
+    "type": "direct",
+    "question": "Trong ví dụ Python, chú thích bắt đầu bằng ký tự nào?",
+    "expected_answer": "Dấu #.",
+    "gold_source_id": "introduction",
+    "gold_page": 1,
+    "evidence_quote": "Comments in Python start with the hash character",
+    "filter": null
+  },
+  {
+    "id": "q02",
+    "split": "dev",
+    "type": "paraphrase",
+    "question": "Trong phần giới thiệu, toán tử nào dùng cho phép chia lấy phần nguyên theo floor?",
+    "expected_answer": "//.",
+    "gold_source_id": "introduction",
+    "gold_page": 2,
+    "evidence_quote": "17 // 3 # floor division discards the fractional part",
+    "filter": {
+      "chapter": "introduction"
+    }
+  },
+  {
+    "id": "q03",
+    "split": "dev",
+    "type": "direct",
+    "question": "Làm sao để dấu gạch chéo ngược trong chuỗi không bị hiểu là ký tự đặc biệt?",
+    "expected_answer": "Thêm tiền tố r để tạo raw string.",
+    "gold_source_id": "introduction",
+    "gold_page": 3,
+    "evidence_quote": "you can use raw strings by adding an r before the first quote",
+    "filter": null
+  },
+  {
+    "id": "q04",
+    "split": "dev",
+    "type": "direct",
+    "question": "Theo tài liệu, list có thay đổi nội dung được không?",
+    "expected_answer": "Có, list là kiểu mutable.",
+    "gold_source_id": "introduction",
+    "gold_page": 6,
+    "evidence_quote": "lists are a mutable type",
+    "filter": null
+  },
+  {
+    "id": "q05",
+    "split": "dev",
+    "type": "condition",
+    "question": "Giá trị điểm cuối của range() có nằm trong dãy sinh ra không?",
+    "expected_answer": "Không.",
+    "gold_source_id": "controlflow",
+    "gold_page": 2,
+    "evidence_quote": "The given end point is never part of the generated sequence",
+    "filter": {
+      "chapter": "controlflow"
+    }
+  },
+  {
+    "id": "q06",
+    "split": "dev",
+    "type": "condition",
+    "question": "Khi nào else gắn với vòng lặp được thực thi?",
+    "expected_answer": "Khi vòng lặp kết thúc mà không gặp break.",
+    "gold_source_id": "controlflow",
+    "gold_page": 3,
+    "evidence_quote": "If the loop finishes without executing the break , the else clause executes",
+    "filter": null
+  },
+  {
+    "id": "q07",
+    "split": "dev",
+    "type": "direct",
+    "question": "Lệnh pass thực hiện thao tác gì?",
+    "expected_answer": "Không làm gì.",
+    "gold_source_id": "controlflow",
+    "gold_page": 4,
+    "evidence_quote": "The pass statement does nothing",
+    "filter": null
+  },
+  {
+    "id": "q08",
+    "split": "dev",
+    "type": "direct",
+    "question": "Từ khóa nào bắt đầu định nghĩa hàm?",
+    "expected_answer": "def.",
+    "gold_source_id": "controlflow",
+    "gold_page": 7,
+    "evidence_quote": "The keyword def introduces a function definition",
+    "filter": null
+  },
+  {
+    "id": "q09",
+    "split": "dev",
+    "type": "paraphrase",
+    "question": "Các phương thức list chỉ sửa đổi tại chỗ thường trả về gì?",
+    "expected_answer": "None.",
+    "gold_source_id": "datastructures",
+    "gold_page": 2,
+    "evidence_quote": "only modify the list have no return value printed",
+    "filter": {
+      "chapter": "datastructures"
+    }
+  },
+  {
+    "id": "q10",
+    "split": "dev",
+    "type": "direct",
+    "question": "List có thể làm stack theo nguyên tắc nào?",
+    "expected_answer": "LIFO, vào sau ra trước.",
+    "gold_source_id": "datastructures",
+    "gold_page": 2,
+    "evidence_quote": "last-in, first-out",
+    "filter": null
+  },
+  {
+    "id": "q11",
+    "split": "dev",
+    "type": "condition",
+    "question": "Set có cho phép phần tử trùng nhau không?",
+    "expected_answer": "Không.",
+    "gold_source_id": "datastructures",
+    "gold_page": 6,
+    "evidence_quote": "A set is an unordered collection with no duplicate elements",
+    "filter": null
+  },
+  {
+    "id": "q12",
+    "split": "dev",
+    "type": "condition",
+    "question": "Các khóa trong dictionary có được trùng nhau không?",
+    "expected_answer": "Không, khóa phải duy nhất.",
+    "gold_source_id": "datastructures",
+    "gold_page": 7,
+    "evidence_quote": "the keys are unique (within one dictionary)",
+    "filter": null
+  },
+  {
+    "id": "q13",
+    "split": "dev",
+    "type": "direct",
+    "question": "Một module Python là loại file nào?",
+    "expected_answer": "File chứa định nghĩa và câu lệnh Python, có đuôi .py.",
+    "gold_source_id": "modules",
+    "gold_page": 1,
+    "evidence_quote": "A module is a file containing Python definitions and statements",
+    "filter": {
+      "chapter": "modules"
+    }
+  },
+  {
+    "id": "q14",
+    "split": "dev",
+    "type": "condition",
+    "question": "Các câu lệnh khởi tạo trong module chạy bao nhiêu lần khi import?",
+    "expected_answer": "Chỉ lần đầu tên module được gặp trong câu lệnh import.",
+    "gold_source_id": "modules",
+    "gold_page": 2,
+    "evidence_quote": "They are executed only the first time the module name is encountered in an import statement",
+    "filter": null
+  },
+  {
+    "id": "q15",
+    "split": "dev",
+    "type": "condition",
+    "question": "Đọc từ file .pyc có làm chương trình chạy nhanh hơn không?",
+    "expected_answer": "Không, chỉ tốc độ nạp nhanh hơn.",
+    "gold_source_id": "modules",
+    "gold_page": 5,
+    "evidence_quote": "A program doesn’t run any faster when it is read from a .pyc file",
+    "filter": null
+  },
+  {
+    "id": "q16",
+    "split": "dev",
+    "type": "paraphrase",
+    "question": "Package tổ chức namespace của module bằng dạng tên gì?",
+    "expected_answer": "Tên module có dấu chấm.",
+    "gold_source_id": "modules",
+    "gold_page": 7,
+    "evidence_quote": "dotted module names",
+    "filter": null
+  },
+  {
+    "id": "q17",
+    "split": "dev",
+    "type": "direct",
+    "question": "F-string chèn giá trị biểu thức bằng cú pháp nào?",
+    "expected_answer": "Tiền tố f/F và biểu thức trong dấu ngoặc nhọn.",
+    "gold_source_id": "inputoutput",
+    "gold_page": 2,
+    "evidence_quote": "prefixing the string with f or F and writing expressions as {expression}",
+    "filter": null
+  },
+  {
+    "id": "q18",
+    "split": "dev",
+    "type": "condition",
+    "question": "Tại sao nên dùng with khi làm việc với file?",
+    "expected_answer": "File được đóng kể cả khi phát sinh exception.",
+    "gold_source_id": "inputoutput",
+    "gold_page": 6,
+    "evidence_quote": "properly closed after its suite finishes, even if an exception is raised",
+    "filter": {
+      "chapter": "inputoutput"
+    }
+  },
+  {
+    "id": "q19",
+    "split": "test",
+    "type": "paraphrase",
+    "question": "Định dạng nào được Python dùng phổ biến để trao đổi dữ liệu có cấu trúc?",
+    "expected_answer": "JSON.",
+    "gold_source_id": "inputoutput",
+    "gold_page": 8,
+    "evidence_quote": "popular data interchange format called JSON",
+    "filter": null
+  },
+  {
+    "id": "q20",
+    "split": "test",
+    "type": "direct",
+    "question": "str.zfill() thêm ký tự gì ở bên trái chuỗi số?",
+    "expected_answer": "Số 0.",
+    "gold_source_id": "inputoutput",
+    "gold_page": 5,
+    "evidence_quote": "pads a numeric string on the left with zeros",
+    "filter": null
+  },
+  {
+    "id": "q21",
+    "split": "test",
+    "type": "direct",
+    "question": "Tài liệu phân biệt hai loại lỗi cơ bản nào?",
+    "expected_answer": "Syntax errors và exceptions.",
+    "gold_source_id": "errors",
+    "gold_page": 1,
+    "evidence_quote": "two distinguishable kinds of errors: syntax errors and exceptions",
+    "filter": null
+  },
+  {
+    "id": "q22",
+    "split": "test",
+    "type": "condition",
+    "question": "except bắt được ngoại lệ thuộc lớp con của lớp ghi trong except không?",
+    "expected_answer": "Có.",
+    "gold_source_id": "errors",
+    "gold_page": 3,
+    "evidence_quote": "instances of the class itself or one of its derived classes",
+    "filter": {
+      "chapter": "errors"
+    }
+  },
+  {
+    "id": "q23",
+    "split": "test",
+    "type": "condition",
+    "question": "Khối finally có chạy khi phát sinh lỗi không?",
+    "expected_answer": "Có, finally vẫn chạy.",
+    "gold_source_id": "errors",
+    "gold_page": 7,
+    "evidence_quote": "the finally clause is executed in any event",
+    "filter": null
+  },
+  {
+    "id": "q24",
+    "split": "test",
+    "type": "paraphrase",
+    "question": "ExceptionGroup dùng để làm gì?",
+    "expected_answer": "Gom nhiều instance ngoại lệ để raise cùng nhau.",
+    "gold_source_id": "errors",
+    "gold_page": 8,
+    "evidence_quote": "wraps a list of exception instances so that they can be raised together",
+    "filter": null
+  }
+]
