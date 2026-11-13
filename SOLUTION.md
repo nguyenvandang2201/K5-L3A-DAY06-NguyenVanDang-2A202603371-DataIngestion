@@ -16,6 +16,8 @@ docker compose -p day6_student_starter up -d --wait
 python scripts/check_setup.py
 python -m src.run
 python -m scripts.audit_results
+python -m scripts.fetch_corpus --verify-existing
+python -m scripts.check_idempotence
 ```
 
 `src.run` tự dùng URL database local mặc định nếu không có `.env`. Docker chỉ mở PostgreSQL tại `127.0.0.1:55433`. Dừng dịch vụ mà giữ dữ liệu bằng `docker compose -p day6_student_starter stop`.
@@ -27,7 +29,7 @@ python -m scripts.fetch_corpus
 python -m scripts.build_benchmark
 ```
 
-Nguồn HTML có thể cập nhật; nếu câu trích dẫn thay đổi, script benchmark sẽ báo lỗi để sửa gold và tạo tập đánh giá mới. Corpus tuân Python Software Foundation License Version 2; xem `data/PYTHON_LICENSE.txt`.
+Nguồn HTML có thể cập nhật; nếu câu trích dẫn thay đổi, script benchmark sẽ báo lỗi để sửa gold và tạo tập đánh giá mới. Chế độ `--verify-existing` chỉ kiểm tra hash và nội dung hiện có, không ghi đè corpus hoặc benchmark. Corpus tuân Python Software Foundation License Version 2; xem `data/PYTHON_LICENSE.txt`.
 
 ## Đầu vào và đầu ra
 
@@ -39,6 +41,8 @@ Nguồn HTML có thể cập nhật; nếu câu trích dẫn thay đổi, script
 | `results/summary.json` | Số chunk, thời gian, Hit@1 và Evidence Hit@3 |
 | `results/traces.jsonl` | Toàn bộ top-3, score, text, metadata cho 72 lượt hỏi |
 | `results/audit.json` | Mẫu coherence, kiểm tra metadata và nhãn grounding |
+| `results/ingest_log.json` | Số đoạn giữ/bỏ, đơn vị rỗng và lỗi đọc nguồn |
+| `results/reingest_check.json` | Số chunk trước/sau chạy lại và xác nhận không trùng ID |
 | `report/individual/2A202603371_NguyenVanDang.md` | Phân tích đủ năm tiêu chí |
 
-Ba chiến lược dùng cùng corpus, model `sentence-transformers/all-MiniLM-L6-v2` và exact cosine search. C chia chunk giống B và chỉ bật filter `chapter` khi câu hỏi yêu cầu. `src.run` thay thế dữ liệu của từng chiến lược trong một transaction khi nạp lại, tránh duplicate và chunk cũ. Kết quả gốc được chạy ngày 13/11/2026. Lần chạy mới sẽ ghi đè `results/summary.json` và `results/traces.jsonl`.
+Ba chiến lược dùng cùng corpus, model `sentence-transformers/all-MiniLM-L6-v2` và exact cosine search. C chia chunk giống B và chỉ bật filter `chapter` khi câu hỏi yêu cầu. `src.run` thay thế dữ liệu của từng chiến lược trong một transaction khi nạp lại, tránh duplicate và chunk cũ. Kết quả gốc được chạy ngày 13/11/2026. Lần chạy mới sẽ ghi đè `results/summary.json` và `results/traces.jsonl`. `check_idempotence` chủ động chạy lại pipeline và ghi lại minh chứng; thời gian trong summary sẽ thuộc lần chạy mới nhất.

@@ -6,11 +6,21 @@
 
 Corpus là sáu chương 3–8 của [Python 3.12 Tutorial](https://docs.python.org/3.12/tutorial/), lấy bản HTML ngày 13/11/2026. Nguồn thuộc Python Software Foundation License Version 2; thông báo bản quyền, URL, thời điểm truy cập, SHA-256 HTML và số ký tự từng đơn vị được lưu trong [`data/manifest.json`](../../data/manifest.json). Bản quyền: Copyright © 2001-2023 Python Software Foundation; All Rights Reserved. Toàn văn giấy phép nằm ở [`data/PYTHON_LICENSE.txt`](../../data/PYTHON_LICENSE.txt).
 
-Sau khi bỏ phần điều hướng HTML, văn bản được chuẩn hóa Unicode NFC và khoảng trắng, giữ ranh giới đoạn và ví dụ mã. Corpus có **59 đơn vị nguồn**, mỗi đơn vị dài ít nhất 1.500 ký tự: 7 đơn vị chương giới thiệu, 16 control flow, 9 data structures, 10 modules, 8 input/output, 9 errors. Đây là đơn vị văn bản tuần tự, **không phải trang PDF**. Corpus được lưu trong [`data/corpus.jsonl`](../../data/corpus.jsonl); vị trí truy vết là `(document_id, page)` với `page` là số thứ tự đơn vị trong chương. Không có đơn vị rỗng; không cần OCR.
+Sau khi bỏ phần điều hướng HTML, văn bản được chuẩn hóa Unicode NFC và khoảng trắng, giữ ranh giới đoạn và ví dụ mã. Corpus có **59 đơn vị nguồn**, mỗi đơn vị dài ít nhất 1.500 ký tự: 7 đơn vị chương giới thiệu, 16 control flow, 9 data structures, 10 modules, 8 input/output, 9 errors. Đây là đơn vị văn bản tuần tự, **không phải trang PDF**. Corpus được lưu trong [`data/corpus.jsonl`](../../data/corpus.jsonl); vị trí truy vết là `(document_id, page)` với `page` là số thứ tự đơn vị trong chương. Không cần OCR.
+
+[`results/ingest_log.json`](../../results/ingest_log.json) ghi lần kiểm chứng trên đúng sáu HTML có SHA-256 khớp manifest: **755 đoạn ứng viên, 724 đoạn giữ lại, 31 đoạn dưới 20 ký tự bị bỏ, 0 đoạn rỗng, 59 đơn vị tạo ra, 0 đơn vị rỗng, 0 lỗi**. Đoạn ngắn bị bỏ có thể gồm heading hữu ích, nên đây là một giới hạn của bước trích xuất.
 
 Embedding: `sentence-transformers/all-MiniLM-L6-v2`, 384 chiều, Sentence Transformers 6.2.0 và PyTorch 2.13.0+cpu. Cùng một model và cùng cách mã hóa được dùng cho document/query trong A, B, C. Vector được chuẩn hóa, tìm exact cosine trên PostgreSQL 16 + pgvector 0.8.7. Metadata mỗi chunk gồm `document_id`, URL `source`, `page`, `chapter`, `title`, `python_version`; `chapter` lấy trực tiếp từ URL chương và dùng để lọc. API cost = **0 USD**; thời gian CPU và điện năng không quy đổi thành tiền.
 
-Pipeline nạp lại theo chiến lược bằng cách thay toàn bộ bản ghi chiến lược trong một transaction, nên không nhân đôi hoặc để lại chunk cũ. Cấu hình truy vấn chỉ nhận filter `chapter` và tham số hóa giá trị SQL. Lệnh tái lập có trong [SOLUTION.md](../../SOLUTION.md).
+Pipeline nạp lại theo chiến lược bằng cách thay toàn bộ bản ghi chiến lược trong một transaction, nên không nhân đôi hoặc để lại chunk cũ. Cấu hình truy vấn chỉ nhận filter `chapter` và tham số hóa giá trị SQL. Lệnh tái lập có trong [SOLUTION.md](../../SOLUTION.md). [`results/reingest_check.json`](../../results/reingest_check.json) lưu số đếm trước/sau lần chạy lại:
+
+| Cấu hình | Trước khi nạp lại | Sau khi nạp lại | ID chunk duy nhất sau chạy |
+|---|---:|---:|---:|
+| A | 288 | 288 | 288 |
+| B | 274 | 274 | 274 |
+| C | 274 | 274 | 274 |
+
+Hit@1/Hit@3 cũng giữ nguyên ở cả dev và test. Minh chứng này kiểm tra nạp lại cùng snapshot; việc thay nội dung nguồn là trường hợp khác chưa được đo riêng.
 
 ## 2. Cấu hình và benchmark
 
@@ -22,22 +32,28 @@ Pipeline nạp lại theo chiến lược bằng cách thay toàn bộ bản ghi
 
 [`benchmark/questions.json`](../../benchmark/questions.json) có **24 câu** với đáp án, nguồn/đơn vị và đoạn bằng chứng đã kiểm tra tồn tại: **18 dev / 6 test**. Có 6 câu cung cấp filter theo chương, gồm 1 câu test. Bộ câu hỏi được tạo và kiểm chứng trước khi truy xuất. Câu hỏi bằng tiếng Việt, nguồn bằng tiếng Anh; đây là một thách thức liên ngôn ngữ đối với model đã chọn. Gold source và đáp án không được đưa vào vector query; C chỉ dùng filter có sẵn trong định nghĩa câu hỏi.
 
-Thứ tự ưu tiên chọn cấu hình là Evidence Hit@3 trên dev, sau đó kiểm tra grounding và tài nguyên. Tiêu chí này được mô tả trong tài liệu lab nhưng **không được lưu thành một bản chốt có timestamp riêng trước lần chạy**, nên đây là giới hạn của kiểm soát test.
+Thứ tự ưu tiên chọn cấu hình là Evidence Hit@3 trên dev, sau đó kiểm tra grounding và tài nguyên. Tiêu chí này được mô tả trong tài liệu lab nhưng **không được lưu thành một bản chốt có timestamp riêng trước lần chạy**, nên đây là giới hạn của kiểm soát test. Dev và test dùng cùng corpus/index như một benchmark retrieval thông thường; không có cặp gold `(document_id, page)` trùng giữa hai split. Tuy nhiên, dev có 2 câu từ chương `inputoutput` (đơn vị 2 và 6), test có 2 câu từ cùng chương (đơn vị 5 và 8), nên vẫn có nguy cơ gần nghĩa ở mức chương. Bốn câu test còn lại thuộc `errors`, chương không xuất hiện trong dev. Cách chia này lệch chủ đề và test nhỏ; không thể coi test là phép đo tổng quát cho toàn corpus.
 
 ## 3. Kết quả chạy
 
-Lần chạy ghi tại `results/summary.json` lúc 03:02 UTC, ngày 13/11/2026. Hit chỉ được tính khi **một** chunk đúng nguồn/đơn vị và chứa đủ chuỗi bằng chứng đã ghi; đây là phép kiểm tra nghiêm ngặt, có thể bỏ sót diễn đạt tương đương hoặc bằng chứng nằm ở nhiều chunk. Toàn bộ top-3, score, text, metadata và nhãn hit ở [`results/traces.jsonl`](../../results/traces.jsonl).
+Lần chạy cuối ghi tại `results/summary.json` lúc 05:32 UTC, ngày 13/11/2026. Hit chỉ được tính khi **một** chunk đúng nguồn/đơn vị và chứa đủ chuỗi bằng chứng đã ghi; đây là phép kiểm tra nghiêm ngặt, có thể bỏ sót diễn đạt tương đương hoặc bằng chứng nằm ở nhiều chunk. Toàn bộ top-3, score, text, metadata và nhãn hit ở [`results/traces.jsonl`](../../results/traces.jsonl).
 
 | Cấu hình | Split | Hit@1 | Evidence Hit@3 | Chunk | Ingest (giây) | API cost |
 |---|---|---:|---:|---:|---:|---:|
-| A | dev | 2/18 | 3/18 | 288 | 5,373 | 0 USD |
-| A | test | 0/6 | 0/6 | 288 | 5,373 | 0 USD |
-| B | dev | 3/18 | 5/18 | 274 | 4,807 | 0 USD |
-| B | test | 0/6 | 0/6 | 274 | 4,807 | 0 USD |
-| C | dev | 4/18 | 6/18 | 274 | 0,128* | 0 USD |
-| C | test | 0/6 | 1/6 | 274 | 0,128* | 0 USD |
+| A | dev | 2/18 | 3/18 | 288 | 5,534 | 0 USD |
+| A | test | 0/6 | 0/6 | 288 | 5,534 | 0 USD |
+| B | dev | 3/18 | 5/18 | 274 | 4,921 | 0 USD |
+| B | test | 0/6 | 0/6 | 274 | 4,921 | 0 USD |
+| C | dev | 4/18 | 6/18 | 274 | 0,130* | 0 USD |
+| C | test | 0/6 | 1/6 | 274 | 0,130* | 0 USD |
 
 \* C dùng lại vector đã tính cho B; thời gian này chỉ gồm tạo chunk và ghi index, không phải thời gian embedding độc lập. Median độ dài chunk: A 600, B/C 527 ký tự. A có một số chunk đuôi rất ngắn (min 1 ký tự), là điểm yếu của cách chia cố định hiện tại.
+
+| Cấu hình | Coherence /2 (10 vị trí) | Metadata đúng (test top-3) | Tuân thủ filter (test) | Grounding 0/1/2; trung bình /2 |
+|---|---:|---:|---:|---:|
+| A | 0,4 | 18/18 | N/A | 5/1/0; 0,17 |
+| B | 1,3 | 18/18 | N/A | 5/1/0; 0,17 |
+| C | 1,3 | 18/18 | 1/1 | 4/1/1; 0,50 |
 
 ## 4. Năm khía cạnh đánh giá
 
@@ -51,7 +67,7 @@ Chọn 10 đơn vị nguồn trải đều theo thứ tự corpus, lấy đoạn
 
 ### Metadata usefulness
 
-Đối chiếu 18 kết quả top-3 của 6 câu test cho mỗi cấu hình với corpus: **A 18/18, B 18/18, C 18/18** có nguồn, đơn vị và `chapter` đủ và đúng. Ở test, C áp dụng filter cho `q22` và **1/1 câu** có toàn bộ top-3 đúng chương. A/B không thiết kế lọc nên chỉ số tuân thủ filter là **N/A**. `source` và `page` giúp truy lại đoạn gốc; `chapter` giúp giới hạn tìm kiếm. Hạn chế: filter quá rộng vì một chương vẫn có nhiều chủ đề.
+Script [`audit_results.py`](../../starter/scripts/audit_results.py) đối chiếu 18 kết quả top-3 của 6 câu test cho mỗi cấu hình với corpus: **A 18/18, B 18/18, C 18/18** có nguồn, đơn vị và `chapter` đủ và đúng. Codex cũng đọc trực tiếp bảng 54 kết quả gồm ID nguồn, đơn vị, URL chương, `chapter` và đoạn đầu text để rà soát tính hợp lý. Việc đối chiếu đầy đủ từng text với nguồn là **kiểm tra tự động**, còn lượt đọc trực tiếp là **kiểm tra có hỗ trợ AI**, chưa phải xác nhận thủ công độc lập của học viên. Ở test, C áp dụng filter cho `q22` và **1/1 câu** có toàn bộ top-3 đúng chương. A/B không thiết kế lọc nên chỉ số tuân thủ filter là **N/A**. `source` và `page` giúp truy lại đoạn gốc; `chapter` giúp giới hạn tìm kiếm. Hạn chế: filter quá rộng vì một chương vẫn có nhiều chủ đề.
 
 ### Grounding quality
 
@@ -71,4 +87,10 @@ A → B giảm 14 chunk và tăng Hit@3 dev 2 câu; coherence tăng 0,9 điểm.
 
 ## 5. Giới hạn và hướng cải tiến
 
-Model tiếng Anh được áp dụng cho câu hỏi tiếng Việt, có khả năng làm giảm chất lượng semantic retrieval; kết quả đo chưa tách riêng ảnh hưởng của ngôn ngữ. Đơn vị nguồn được chia theo độ dài chứ không phải trang gốc, nên page ID chỉ có nghĩa trong snapshot này. Exact quote hit là proxy nghiêm ngặt, không đánh giá được bằng chứng tương đương. Mẫu test sáu câu nhỏ và audit chỉ một lượt. Một thử nghiệm tiếp theo nên chốt tập test mới trước khi đổi sang model đa ngữ và đánh giá lại; không dùng tập test hiện tại để báo như holdout mới sau khi tinh chỉnh.
+Model tiếng Anh được áp dụng cho câu hỏi tiếng Việt, có khả năng làm giảm chất lượng semantic retrieval; kết quả đo chưa tách riêng ảnh hưởng của ngôn ngữ. Đơn vị nguồn được chia theo độ dài chứ không phải trang gốc, nên page ID chỉ có nghĩa trong snapshot này. Exact quote hit là proxy nghiêm ngặt, không đánh giá được bằng chứng tương đương. Mẫu test sáu câu nhỏ và audit chỉ một lượt. So sánh A–B thay đồng thời kiểu chia chunk **và** giới hạn độ dài (600/650 ký tự), nên không thể quy toàn bộ chênh lệch cho kiểu chia; B–C mới là cặp chỉ khác filter. Một thử nghiệm tiếp theo nên chốt tập test mới trước khi đổi sang model đa ngữ và đánh giá lại; không dùng tập test hiện tại để báo như holdout mới sau khi tinh chỉnh.
+
+## 6. Sử dụng AI và kiểm tra lại
+
+**Công cụ:** OpenAI Codex hỗ trợ viết mã pipeline, tạo câu hỏi benchmark, lập bảng audit và soạn báo cáo. Công cụ không tạo embedding giả, không tự điền số liệu chưa chạy và không sửa test sau khi xem kết quả. Các nhãn coherence/grounding là đánh giá định tính có hỗ trợ AI, chưa được người chấm độc lập xác nhận.
+
+**Kiểm tra:** từng `evidence_quote` của 24 câu được script xác nhận có trong đúng đơn vị nguồn trước lần retrieval; sáu HTML kiểm chứng lại khớp SHA-256 snapshot; Python biên dịch cú pháp; PostgreSQL/pgvector kết nối thành công; pipeline chạy và lưu 72 trace; chạy lại giữ nguyên 288/274/274 chunk, không trùng ID và không đổi chỉ số. Codex đọc trực tiếp các hàng metadata và các đoạn top-3 test để kiểm tra nhãn; script đối chiếu toàn bộ text/metadata với corpus. Người học nên đọc lại các nhãn định tính trước khi bảo vệ bài.

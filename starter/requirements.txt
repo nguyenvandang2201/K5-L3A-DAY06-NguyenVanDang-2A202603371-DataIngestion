@@ -2,6 +2,7 @@
 psycopg[binary]==3.3.8
 pypdf>=5,<7
 python-dotenv>=1,<2
-sentence-transformers>=6,<7
+sentence-transformers==6.2.0
+torch==2.13.0
 beautifulsoup4>=4,<5
 requests>=2,<3

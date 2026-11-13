@@ -1,0 +1,81 @@
+{
+  "checked_at_utc": "2026-11-13T05:31:38.972379+00:00",
+  "mode": "verify_existing",
+  "sources": [
+    {
+      "source_id": "introduction",
+      "source_url": "https://docs.python.org/3.12/tutorial/introduction.html",
+      "candidate_blocks": 114,
+      "skipped_short_blocks": 6,
+      "empty_blocks": 0,
+      "kept_blocks": 108,
+      "content_units": 7,
+      "empty_units": 0,
+      "sha256_html": "44f030b58bc1c0521c688457450a3f8ca14b20848e4221827fd205fb680eb5db"
+    },
+    {
+      "source_id": "controlflow",
+      "source_url": "https://docs.python.org/3.12/tutorial/controlflow.html",
+      "candidate_blocks": 203,
+      "skipped_short_blocks": 5,
+      "empty_blocks": 0,
+      "kept_blocks": 198,
+      "content_units": 16,
+      "empty_units": 0,
+      "sha256_html": "71794fe4d941f7dd1ba7b1b125d5bc371cf77b06f250bbf07673f89f6a6d0a31"
+    },
+    {
+      "source_id": "datastructures",
+      "source_url": "https://docs.python.org/3.12/tutorial/datastructures.html",
+      "candidate_blocks": 125,
+      "skipped_short_blocks": 6,
+      "empty_blocks": 0,
+      "kept_blocks": 119,
+      "content_units": 9,
+      "empty_units": 0,
+      "sha256_html": "3f75467774125149c1d97995193f18332043f666c711dd33b81a4fcb719a3920"
+    },
+    {
+      "source_id": "modules",
+      "source_url": "https://docs.python.org/3.12/tutorial/modules.html",
+      "candidate_blocks": 113,
+      "skipped_short_blocks": 7,
+      "empty_blocks": 0,
+      "kept_blocks": 106,
+      "content_units": 10,
+      "empty_units": 0,
+      "sha256_html": "07b54eaa726c8495636b0094412545a05d4d3163290496c2bd3dcd7888ac5691"
+    },
+    {
+      "source_id": "inputoutput",
+      "source_url": "https://docs.python.org/3.12/tutorial/inputoutput.html",
+      "candidate_blocks": 104,
+      "skipped_short_blocks": 5,
+      "empty_blocks": 0,
+      "kept_blocks": 99,
+      "content_units": 8,
+      "empty_units": 0,
+      "sha256_html": "bd064c24cd5fdc74cc50b0d96cf4ff0bc713ac99b4e4d6a4c0cee3d7b24f92b3"
+    },
+    {
+      "source_id": "errors",
+      "source_url": "https://docs.python.org/3.12/tutorial/errors.html",
+      "candidate_blocks": 96,
+      "skipped_short_blocks": 2,
+      "empty_blocks": 0,
+      "kept_blocks": 94,
+      "content_units": 9,
+      "empty_units": 0,
+      "sha256_html": "f9a32af10feb2cc14ee68b193c7cecdbbf8e67a5d7267e97f7b8a857c44c4101"
+    }
+  ],
+  "errors": [],
+  "totals": {
+    "candidate_blocks": 755,
+    "kept_blocks": 724,
+    "skipped_short_blocks": 31,
+    "empty_blocks": 0,
+    "content_units": 59,
+    "empty_units": 0
+  }
+}
